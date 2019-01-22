@@ -1,3 +1,6 @@
+# powered by Issac AI
+# written by Lleyton Ariton
+
 import os
 import numpy as np
 import matplotlib.pyplot as plt
