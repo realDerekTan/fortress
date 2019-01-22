@@ -1,4 +1,5 @@
 # powered by Issac AI
+# written by Lleyton Ariton, all rights belong to him
 
 import os
 import numpy as np
