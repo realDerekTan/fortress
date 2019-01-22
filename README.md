@@ -1,5 +1,5 @@
 # fortress
-The first prototype of Fortress AI
+The first prototype of Fortress AI, created by Lleyton Ariton and Derek Tan
 
 Fortress AI uses NLP, GANs, and CNNs to detect and identify faces by generating photorealistic images. Right now, we are working on our first working prototype
 
@@ -13,7 +13,7 @@ State of the art facial recognition algorithm would then identify and classify i
 
 Created by Lleyton Ariton and Derek Tan
 
-Copyright 2019 Derek Tan
+Copyright 2019 Fortress AI
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
