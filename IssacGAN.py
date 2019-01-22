@@ -1,6 +1,3 @@
-# powered by Issac AI
-# written by Lleyton Ariton, all rights belong to him
-
 import os
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,11 +5,11 @@ from PIL import Image
 from keras.preprocessing.image import img_to_array, array_to_img
 from keras.models import Input, Model, Sequential
 from keras.layers import Dense, Dropout, GaussianNoise, Conv2DTranspose
-from keras.layers import ReLU, LeakyReLU, Flatten, BatchNormalization, UpSampling2D, Reshape
+from keras.layers import LeakyReLU, Flatten, BatchNormalization, UpSampling2D, Reshape
 from keras.layers import Conv1D, Conv2D, MaxPooling1D, MaxPooling2D
 from keras.layers import Flatten, Concatenate, concatenate
 from keras.layers import GRU, LSTM, Bidirectional, Embedding, Input
-
+from keras.layers import ReLU
 
 def LeNet1D(nb_output_classes, input_layer=None, input_shape=None):
 
@@ -31,6 +28,7 @@ def LeNet1D(nb_output_classes, input_layer=None, input_shape=None):
 
     model = Model(input_layer, output_layer)
     print(model.summary())
+
     return model
 
 
@@ -51,6 +49,7 @@ def LeNet2D(nb_output_classes, input_layer=None, input_shape=None):
 
     model = Model(input_layer, output_layer)
     print(model.summary())
+
     return model
 
 
@@ -90,6 +89,7 @@ def AlexNet1D(nb_output_classes, input_layer=None, input_shape=None):
 
     model = Model(input_layer, output_layer)
     print(model.summary())
+
     return model
 
 
@@ -129,6 +129,7 @@ def AlexNet2D(nb_output_classes, input_layer=None, input_shape=None):
 
     model = Model(input_layer, output_layer)
     print(model.summary())
+
     return model
 
 
@@ -172,6 +173,7 @@ def VGG16_1D(nb_output_classes, input_layer=None, input_shape=None):
 
     model = Model(input_layer, x)
     print(model.summary())
+
     return model
 
 
@@ -214,6 +216,7 @@ def VGG16_2D(nb_output_classes, input_layer=None, input_shape=None):
 
     model = Model(input_layer, x)
     print(model.summary())
+
     return model
 
 
@@ -222,6 +225,7 @@ class IsaacGAN:
         I do not claim to own any of the IsaacGAN code. Though it was modified, the essence of the code is still credited to Rowel Atienza.
         His original code that IsaacGAN was built upon can be found here: https://github.com/roatienza/Deep-Learning-Experiments
         """
+
     def __init__(self, data_filepath, output_data_filepath, epochs=1000, batchsize=256, checkpoint=50):
         def preprocess_data(file_path):
             data = []
@@ -287,7 +291,8 @@ class IsaacGAN:
 
         self.combine = combine()
 
-        def train_isaac_gan(x_train, generator_model, discriminator_model, adversarial_model, train_steps=2000, batch_size=256,
+        def train_isaac_gan(x_train, generator_model, discriminator_model, adversarial_model, train_steps=2000,
+                            batch_size=256,
                             save_interval=0):
 
             def plot_images(x_train, generator_model, save2file=False, fake=True, samples=16, noise=None, step=0):
