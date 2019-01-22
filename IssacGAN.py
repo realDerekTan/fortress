@@ -8,219 +8,10 @@ from PIL import Image
 from keras.preprocessing.image import img_to_array, array_to_img
 from keras.models import Input, Model, Sequential
 from keras.layers import Dense, Dropout, GaussianNoise, Conv2DTranspose
-from keras.layers import LeakyReLU, Flatten, BatchNormalization, UpSampling2D, Reshape
+from keras.layers import ReLU, LeakyReLU, Flatten, BatchNormalization, UpSampling2D, Reshape
 from keras.layers import Conv1D, Conv2D, MaxPooling1D, MaxPooling2D
 from keras.layers import Flatten, Concatenate, concatenate
 from keras.layers import GRU, LSTM, Bidirectional, Embedding, Input
-from keras.layers import ReLU
-
-def LeNet1D(nb_output_classes, input_layer=None, input_shape=None):
-
-    if input_shape is not None:
-        input_layer = Input(input_shape)
-    else:
-        input_layer = input_layer
-
-    x = Conv1D(20, 5, strides=1, padding='same', activation='tanh')(input_layer)
-    x = MaxPooling1D(pool_size=2, strides=2, padding='same')(x)
-    x = Conv1D(50, 5, strides=1, padding='same', activation='tanh')(x)
-    x = MaxPooling1D(pool_size=2, strides=2, padding='same')(x)
-    x = Flatten()(x)
-    x = Dense(500, activation='tanh')(x)
-    output_layer = Dense(int(nb_output_classes), activation='softmax')(x)
-
-    model = Model(input_layer, output_layer)
-    print(model.summary())
-
-    return model
-
-
-def LeNet2D(nb_output_classes, input_layer=None, input_shape=None):
-
-    if input_shape is not None:
-        input_layer = Input(input_shape)
-    else:
-        input_layer = input_layer
-
-    x = Conv2D(20, (5, 5), strides=(1, 1), padding='same', activation='tanh')(input_layer)
-    x = MaxPooling2D(pool_size=(2, 2), strides=2, padding='same')(x)
-    x = Conv2D(50, (5, 5), strides=(1, 1), padding='same', activation='tanh')(x)
-    x = MaxPooling2D(pool_size=(2, 2), strides=2, padding='same')(x)
-    x = Flatten()(x)
-    x = Dense(500, activation='tanh')(x)
-    output_layer = Dense(int(nb_output_classes), activation='softmax')(x)
-
-    model = Model(input_layer, output_layer)
-    print(model.summary())
-
-    return model
-
-
-def AlexNet1D(nb_output_classes, input_layer=None, input_shape=None):
-
-    if input_shape is not None:
-        input_layer = Input(input_shape)
-    else:
-        input_layer = input_layer
-
-    x = Conv1D(96, 11, strides=4, padding='same')(input_layer)
-    x = ReLU()(x)
-    x = MaxPooling1D(pool_size=3, strides=2, padding='same')(x)
-    x = BatchNormalization()(x)
-    x = Conv1D(256, 5, strides=1, padding='same')(x)
-    x = ReLU()(x)
-    x = MaxPooling1D(pool_size=3, strides=2, padding='same')(x)
-    x = BatchNormalization()(x)
-    x = Conv1D(384, 3, strides=1, padding='same')(x)
-    x = ReLU()(x)
-    x = Conv1D(384, 3, strides=1, padding='same')(x)
-    x = ReLU()(x)
-    x = Conv1D(256, 3, strides=1, padding='same')(x)
-    x = ReLU()(x)
-    x = MaxPooling1D(pool_size=3,  strides=2, padding='same')(x)
-    x = Flatten()(x)
-    x = Dense(4096)(x)
-    x = ReLU()(x)
-    x = Dropout(0.5)(x)
-    x = Dense(4096)(x)
-    x = ReLU()(x)
-    x = Dropout(0.5)(x)
-    x = Dense(4096)(x)
-    x = ReLU()(x)
-    x = Dropout(0.5)(x)
-    output_layer = Dense(int(nb_output_classes), activation='softmax')(x)
-
-    model = Model(input_layer, output_layer)
-    print(model.summary())
-
-    return model
-
-
-def AlexNet2D(nb_output_classes, input_layer=None, input_shape=None):
-
-    if input_shape is not None:
-        input_layer = Input(input_shape)
-    else:
-        input_layer = input_layer
-
-    x = Conv2D(96, (11, 11), strides=(4, 4), padding='same')(input_layer)
-    x = ReLU()(x)
-    x = MaxPooling2D(pool_size=(3, 3), strides=(2, 2), padding='same')(x)
-    x = BatchNormalization()(x)
-    x = Conv2D(256, (5, 5), strides=(1, 1), padding='same')(x)
-    x = ReLU()(x)
-    x = MaxPooling2D(pool_size=(3, 3), strides=(2, 2), padding='same')(x)
-    x = BatchNormalization()(x)
-    x = Conv2D(384, (3, 3), strides=(1, 1), padding='same')(x)
-    x = ReLU()(x)
-    x = Conv2D(384, (3, 3), strides=(1, 1), padding='same')(x)
-    x = ReLU()(x)
-    x = Conv2D(256, (3, 3), strides=(1, 1), padding='same')(x)
-    x = ReLU()(x)
-    x = MaxPooling2D(pool_size=(3, 3), strides=(2, 2), padding='same')(x)
-    x = Flatten()(x)
-    x = Dense(4096)(x)
-    x = ReLU()(x)
-    x = Dropout(0.5)(x)
-    x = Dense(4096)(x)
-    x = ReLU()(x)
-    x = Dropout(0.5)(x)
-    x = Dense(4096)(x)
-    x = ReLU()(x)
-    x = Dropout(0.5)(x)
-    output_layer = Dense(int(nb_output_classes), activation='softmax')(x)
-
-    model = Model(input_layer, output_layer)
-    print(model.summary())
-
-    return model
-
-
-def VGG16_1D(nb_output_classes, input_layer=None, input_shape=None):
-
-    if input_shape is not None:
-        input_layer = Input(input_shape)
-    else:
-        input_layer = input_layer
-
-    x = Conv1D(64, 3, strides=1, padding='same')(input_layer)
-    x = ReLU()(x)
-    x = MaxPooling1D(pool_size=2, strides=2, padding='same')(x)
-    x = Conv1D(128, 3, strides=1, padding='same')(x)
-    x = ReLU()(x)
-    x = MaxPooling1D(pool_size=2, strides=2, padding='same')(x)
-    x = Conv1D(256, 3, strides=1, padding='same')(x)
-    x = ReLU()(x)
-    x = MaxPooling1D(pool_size=2, strides=2, padding='same')(x)
-    x = Conv1D(256, 3, strides=1, padding='same')(x)
-    x = ReLU()(x)
-    x = MaxPooling1D(pool_size=2, strides=2, padding='same')(x)
-    x = Conv1D(512, 3, strides=1, padding='same')(x)
-    x = ReLU()(x)
-    x = Conv1D(512, 3, strides=1, padding='same')(x)
-    x = ReLU()(x)
-    x = MaxPooling1D(pool_size=2, strides=2, padding='same')(x)
-    x = Conv1D(512, 3, strides=1, padding='same')(x)
-    x = ReLU()(x)
-    x = Conv1D(512, 3, strides=1, padding='same')(x)
-    x = ReLU()(x)
-    x = MaxPooling1D(pool_size=2, strides=2, padding='same')(x)
-    x = Flatten()(x)
-    x = Dense(4096)(x)
-    x = ReLU()(x)
-    x = Dropout(0.2)(x)
-    x = Dense(4096)(x)
-    x = ReLU()(x)
-    x = Dropout(0.2)(x)
-    x = Dense(int(nb_output_classes), activation='softmax')(x)
-
-    model = Model(input_layer, x)
-    print(model.summary())
-
-    return model
-
-
-def VGG16_2D(nb_output_classes, input_layer=None, input_shape=None):
-    if input_shape is not None:
-        input_layer = Input(input_shape)
-    else:
-        input_layer = input_layer
-
-    x = Conv2D(64, (3, 3), strides=(1, 1), padding='same')(input_layer)
-    x = ReLU()(x)
-    x = MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same')(x)
-    x = Conv2D(128, (3, 3), strides=(1, 1), padding='same')(x)
-    x = ReLU()(x)
-    x = MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same')(x)
-    x = Conv1D(256, (3, 3), strides=(1, 1), padding='same')(x)
-    x = ReLU()(x)
-    x = MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same')(x)
-    x = Conv2D(256, (3, 3), strides=(1, 1), padding='same')(x)
-    x = ReLU()(x)
-    x = MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same')(x)
-    x = Conv2D(512, (3, 3), strides=(1, 1), padding='same')(x)
-    x = ReLU()(x)
-    x = Conv2D(512, (3, 3), strides=(1, 1), padding='same')(x)
-    x = ReLU()(x)
-    x = MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same')(x)
-    x = Conv2D(512, (3, 3), strides=(1, 1), padding='same')(x)
-    x = ReLU()(x)
-    x = Conv2D(512, (3, 3), strides=(1, 1), padding='same')(x)
-    x = ReLU()(x)
-    x = MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same')(x)
-    x = Flatten()(x)
-    x = Dense(4096)(x)
-    x = ReLU()(x)
-    x = Dropout(0.2)(x)
-    x = Dense(4096)(x)
-    x = ReLU()(x)
-    x = Dropout(0.2)(x)
-    x = Dense(int(nb_output_classes), activation='softmax')(x)
-
-    model = Model(input_layer, x)
-    print(model.summary())
-
-    return model
 
 
 class IsaacGAN:
@@ -327,24 +118,24 @@ class IsaacGAN:
             noise_input = None
             if save_interval > 0:
                 noise_input = np.random.uniform(-1.0, 1.0, size=[16, 100])
-    for i in range(train_steps):
-        images_train = x_train[np.random.randint(0, x_train.shape[0], size=batch_size), :, :, :]
-        noise = np.random.uniform(-1.0, 1.0, size=[batch_size, 100])
-        images_fake = generator_model.predict(noise)
-        x = np.concatenate((images_train, images_fake))
-        y = np.ones([2 * batch_size, 1])
-        y[batch_size:, :] = 0
-        d_loss = discriminator_model.train_on_batch(x, y)
+            for i in range(train_steps):
+                images_train = x_train[np.random.randint(0, x_train.shape[0], size=batch_size), :, :, :]
+                noise = np.random.uniform(-1.0, 1.0, size=[batch_size, 100])
+                images_fake = generator_model.predict(noise)
+                x = np.concatenate((images_train, images_fake))
+                y = np.ones([2 * batch_size, 1])
+                y[batch_size:, :] = 0
+                d_loss = discriminator_model.train_on_batch(x, y)
 
-        y = np.ones([batch_size, 1])
-        noise = np.random.uniform(-1.0, 1.0, size=[batch_size, 100])
-        a_loss = adversarial_model.train_on_batch(noise, y)
-        log_mesg = "%d: Discriminator loss: %f, acc: %f -----" % (i, d_loss[0], d_loss[1])
-        log_mesg = "%s  Adversarial Model loss: %f, acc: %f" % (log_mesg, a_loss[0], a_loss[1])
-        print(log_mesg)
-        if save_interval > 0:
-            if (i + 1) % save_interval == 0:
-                plot_images(x_train, generator_model, save2file=True, samples=noise_input.shape[0],
-                                noise=noise_input, step=(i + 1))
+                y = np.ones([batch_size, 1])
+                noise = np.random.uniform(-1.0, 1.0, size=[batch_size, 100])
+                a_loss = adversarial_model.train_on_batch(noise, y)
+                log_mesg = "%d: Discriminator loss: %f, acc: %f -----" % (i, d_loss[0], d_loss[1])
+                log_mesg = "%s  Adversarial Model loss: %f, acc: %f" % (log_mesg, a_loss[0], a_loss[1])
+                print(log_mesg)
+                if save_interval > 0:
+                    if (i + 1) % save_interval == 0:
+                        plot_images(x_train, generator_model, save2file=True, samples=noise_input.shape[0],
+                                    noise=noise_input, step=(i + 1))
 
-                self.train_isaac_gan = train_isaac_gan(self.data, self.create_generator, self.create_discriminator, self.combine, train_steps=epochs, batch_size=batchsize, save_interval=checkpoint)
+        self.train_isaac_gan = train_isaac_gan(self.data, self.create_generator, self.create_discriminator, self.combine, train_steps=epochs, batch_size=batchsize, save_interval=checkpoint)
