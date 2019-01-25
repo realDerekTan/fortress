@@ -3,11 +3,11 @@ The first prototype of Fortress AI, created by Lleyton Ariton and Derek Tan
 
 Fortress AI uses NLP, GANs, and CNNs to detect and identify faces by generating photorealistic images. Right now, we are working on our first working prototype
 
-Fortress uses NLP to understand and extract key facial features, which is then fed to the GAN
+1.  Fortress uses NLP to understand and extract key facial features, which is then fed to the GAN
 
-The GAN would then generate photorealistic images based on aforementioned characteristics
+2.  The GAN would then generate photorealistic images based on aforementioned characteristics
 
-State of the art facial recognition algorithm would then identify and classify image as a specific person
+3.  State of the art facial recognition algorithm would then identify and classify image as a specific person
 
 Note: This is currently a work in progress, not a working model at the moment. However, we are working hard to improve and will release a working model as soon as it is finished!
 
