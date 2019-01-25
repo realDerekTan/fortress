@@ -9,6 +9,8 @@ The GAN would then generate photorealistic images based on aforementioned charac
 
 State of the art facial recognition algorithm would then identify and classify image as a specific person
 
+Note: This is currently a work in progress, not a working model at the moment. However, we are working hard to improve and will release a working model as soon as it is finished!
+
 
 
 Created by Lleyton Ariton and Derek Tan
