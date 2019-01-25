@@ -12,10 +12,10 @@ State of the art facial recognition algorithm would then identify and classify i
 Note: This is currently a work in progress, not a working model at the moment. However, we are working hard to improve and will release a working model as soon as it is finished!
 
 
-
+## License
 Created by Lleyton Ariton and Derek Tan
 
-Copyright 2019 Fortress AI
+Copyright © 2019 Fortress AI
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
