@@ -1,6 +1,12 @@
 # I do not claim to own any of the facial recognition algorithm. Though it was modified, the essence of the code is still credited to Will Koehrsen.
 # His original code that IsaacGAN was built upon can be found here: https://medium.com/@williamkoehrsen/facial-recognition-using-googles-convolutional-neural-network-5aa752b4240e
 
+"""
+Does not work at the moment! This is currently a work in progress, and it still contains many bugs and issues. We are currently working on
+making it better, and hopefully we can get a fully working model sometime in the near future. But for now, here's our progress that we've
+made so far.
+"""
+
 # Import useful Python libraries
 import tensorflow as tf
 import numpy as np
